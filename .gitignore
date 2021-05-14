@@ -128,5 +128,6 @@ $RECYCLE.BIN/
 
 #
 .vscode/
-
+push_swap
+/test
 # End of https://www.toptal.com/developers/gitignore/api/c,macos,windows,linux
