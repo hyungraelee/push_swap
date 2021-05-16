@@ -68,6 +68,13 @@ int		check_duplicate(int argc, char **argv)
 	return (1);
 }
 
+t_stack	*get_token_a(char *argv)
+{
+	if (!argv)
+		return (NULL);
+	// to check if argv is in integer range
+}
+
 t_stack	*get_stack_a(int argc, char **argv)
 {
 	t_stack	*a;
@@ -75,6 +82,8 @@ t_stack	*get_stack_a(int argc, char **argv)
 	int		i;
 
 	i = 1;
+	a = NULL;
+	temp = NULL;
 	// a = init_stack();
 	if (!check_duplicate(argc, argv))
 		return (NULL);
@@ -82,8 +91,21 @@ t_stack	*get_stack_a(int argc, char **argv)
 	{
 		if (!check_digit(argv[i]))
 			return (NULL);
-
+		temp = get_token_a(argv[i])
+		if (!temp)
+			return (NULL);
+		if (!a)
+			a = temp;
+		else
+		{
+			a->next = temp;
+			temp->prev = a;
+			a = a->next;
+		}
 	}
+	while (a->prev)
+		a = a->prev;
+	return (a);
 }
 
 int	main(int argc, char **argv)
