@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 22:57:44 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/18 22:38:36 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/19 00:55:16 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define ERR_MSG2 "Error : Some arguments aren't integer.\n"
 # define ERR_MSG3 "Error : Some arguments are bigger than an integer.\n"
 
+int		push_swap(t_stack *a, t_stack *b);
 void	print_err(char *str);
 void	check_arg(int argc, char **argv);
 t_stack	*get_stack_a(int argc, char **argv);

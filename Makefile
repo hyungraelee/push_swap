@@ -8,6 +8,7 @@ SRCS_DIR =	./srcs	\
 OBJS_DIR = ./objs
 INC_DIR = ./includes
 SRCS =	./srcs/main.c	\
+		./srcs/push_swap.c	\
 		./srcs/check_arg.c	\
 		./srcs/error.c	\
 		./srcs/get_stack_a.c	\
