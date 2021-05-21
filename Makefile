@@ -13,6 +13,8 @@ SRCS =	./srcs/main.c	\
 		./srcs/error.c	\
 		./srcs/set_stack.c	\
 		./srcs/operation/swap.c	\
+		./srcs/operation/rotate.c	\
+		./srcs/operation/rev_rotate.c	\
 		./srcs/utils/ft_atoi.c	\
 		./srcs/utils/ft_isdigit.c	\
 		./srcs/utils/ft_putstr_fd.c	\

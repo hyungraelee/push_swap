@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 22:58:24 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/21 16:59:27 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/21 17:20:29 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	main(int argc, char **argv)
 	printf("last %d\n", a->last->value);
 	while (a->stack->prev)
 		a->stack = a->stack->prev;
-	swap(a, NULL);
+	// swap(a, NULL);
+	rev_rotate(a, NULL);
 	while (a->stack)
 	{
 		printf("%d\n", a->stack->value);
