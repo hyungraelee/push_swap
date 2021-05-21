@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 23:29:30 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/21 16:41:08 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/21 18:51:36 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,22 @@
 
 # include "push_swap.h"
 
-typedef struct s_a		t_a;
-typedef struct s_a		t_b;
-typedef struct s_stack	t_stack;
-
-struct s_a
-{
-	t_stack	*stack;
-	t_stack	*first;
-	t_stack	*second;
-	t_stack	*last;
-};
+typedef struct s_stack		t_stack;
+typedef struct s_element	t_element;
 
 struct s_stack
 {
+	t_element	*stack;
+	t_element	*first;
+	t_element	*second;
+	t_element	*last;
+};
+
+struct s_element
+{
 	int		value;
-	t_stack	*next;
-	t_stack	*prev;
+	t_element	*next;
+	t_element	*prev;
 };
 
 #endif

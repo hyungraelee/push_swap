@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static void	swap_stack(t_a *a)
+static void	swap_stack(t_stack *a)
 {
 	a->stack = a->stack->next;
 	a->stack->prev->next = a->stack->next;
@@ -11,7 +11,7 @@ static void	swap_stack(t_a *a)
 	a->second = a->stack->next;
 }
 
-void		swap(t_a *a, t_b *b)
+void		swap(t_stack *a, t_stack *b)
 {
 	if (a && b)
 	{

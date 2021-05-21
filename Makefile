@@ -12,6 +12,7 @@ SRCS =	./srcs/main.c	\
 		./srcs/check_arg.c	\
 		./srcs/error.c	\
 		./srcs/set_stack.c	\
+		./srcs/operation/push.c	\
 		./srcs/operation/swap.c	\
 		./srcs/operation/rotate.c	\
 		./srcs/operation/rev_rotate.c	\

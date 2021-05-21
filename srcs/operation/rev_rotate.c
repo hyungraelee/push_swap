@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	rev_rotate_stack(t_a *a)
+void	rev_rotate_stack(t_stack *a)
 {
 	a->last->next = a->first;
 	a->first->prev = a->last;
@@ -12,7 +12,7 @@ void	rev_rotate_stack(t_a *a)
 	a->stack = a->first;
 }
 
-void	rev_rotate(t_a *a, t_b *b)
+void	rev_rotate(t_stack *a, t_stack *b)
 {
 	if (a && b)
 	{
