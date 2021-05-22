@@ -2,14 +2,16 @@
 
 void	rotate_stack(t_stack *a)
 {
-	a->last->next = a->first;
-	a->first->prev = a->last;
-	a->last = a->first;
-	a->first = a->second;
-	a->second = a->first->next;
-	a->first->prev = NULL;
-	a->last->next = NULL;
-	a->stack = a->first;
+	if (a->cnt > 1)
+	{
+		a->tail->next = a->head;
+		a->head->prev = a->tail;
+		a->tail = a->head;
+		a->head = a->tail->next;
+		a->head->prev = NULL;
+		a->tail->next = NULL;
+		a->stack = a->head;
+	}
 }
 
 void	rotate(t_stack *a, t_stack *b)

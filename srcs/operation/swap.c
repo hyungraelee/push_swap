@@ -2,13 +2,17 @@
 
 static void	swap_stack(t_stack *a)
 {
-	a->stack = a->stack->next;
-	a->stack->prev->next = a->stack->next;
-	a->stack->prev->prev = a->stack;
-	a->stack->next = a->stack->prev;
-	a->stack->prev = NULL;
-	a->first = a->stack;
-	a->second = a->stack->next;
+	if (a->cnt > 1)
+	{
+		a->stack = a->stack->next;
+		a->stack->prev->next = a->stack->next;
+		a->stack->prev->prev = a->stack;
+		a->stack->next = a->stack->prev;
+		a->stack->prev = NULL;
+		a->head = a->stack;
+		if (a->cnt == 2)
+			a->tail = a->head->next;
+	}
 }
 
 void		swap(t_stack *a, t_stack *b)

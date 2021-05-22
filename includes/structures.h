@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 23:29:30 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/21 18:51:36 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/22 20:18:29 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ typedef struct s_element	t_element;
 struct s_stack
 {
 	t_element	*stack;
-	t_element	*first;
-	t_element	*second;
-	t_element	*last;
+	t_element	*head;
+	t_element	*tail;
+	int			cnt;
 };
 
 struct s_element

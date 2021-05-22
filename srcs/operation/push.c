@@ -1,50 +1,79 @@
 #include "push_swap.h"
 
-void	set_src_stack(t_stack *src)
-{
-	if (src->stack)
-	{
-		src->first = src->stack;
-		if (src->second->next)
-			src->second = src->second->next;
-		else
-			src->second = NULL;
-		src->first->prev = NULL;
-		src->stack = src->first;
-		while (src->stack->next)
-			src->stack = src->stack->next;
-		src->last = src->stack;
-		src->stack = src->first;
-	}
-	else
-	{
-		src->first = NULL;
-		src->second = NULL;
-		src->last = NULL;
-		src->stack = NULL;
-	}
-}
+// void	set_src_stack(t_stack *src)
+// {
+// 	if (src->stack)
+// 	{
+// 		src->first = src->stack;
+// 		if (src->second->next)
+// 			src->second = src->second->next;
+// 		else
+// 			src->second = NULL;
+// 		src->first->prev = NULL;
+// 		src->stack = src->first;
+// 		while (src->stack->next)
+// 			src->stack = src->stack->next;
+// 		src->last = src->stack;
+// 		src->stack = src->first;
+// 	}
+// 	else
+// 	{
+// 		src->first = NULL;
+// 		src->second = NULL;
+// 		src->last = NULL;
+// 		src->stack = NULL;
+// 	}
+// }
 
 void	push_stack(t_stack *src, t_stack *des)
 {
-	src->stack = src->stack->next;
-	if (!des->stack)
+	if (src->cnt > 0)
 	{
-		des->first = src->first;
-		des->stack = des->first;
-		des->second = NULL;
-		des->last = des->stack;
-		des->first->next = NULL;
+		src->stack = src->stack->next;
+		if (des->cnt == 0)
+		{
+			des->stack = src->head;
+			des->head = des->stack;
+			des->head->prev = NULL;
+			des->head->next = NULL;
+			if (src->cnt > 1)
+			{
+				src->head = src->stack;
+				src->head->prev = NULL;
+			}
+			else
+			{
+				src->head = NULL;
+				src->tail = NULL;
+				src->stack = NULL;
+			}
+			des->tail = NULL;
+			des->cnt++;
+			src->cnt--;
+		}
+		else if (des->cnt >= 1)
+		{
+			des->head = src->head;
+			des->head->next = des->stack;
+			des->stack->prev = des->head;
+			des->stack = des->head;
+			if (src->cnt > 1)
+			{
+				src->head = src->stack;
+				src->head->prev = NULL;
+			}
+			else
+			{
+				src->head = NULL;
+				src->tail = NULL;
+				src->stack = NULL;
+			}
+			if (des->cnt == 1)
+				des->tail = des->head->next;
+			des->cnt++;
+			src->cnt--;
+		}
 	}
-	else
-	{
-		src->first->next = des->first;
-		des->first->prev = src->first;
-		des->second = des->first;
-		des->first = src->first;
-		des->stack = des->first;
-	}
-	set_src_stack(src);
 }
 
 void	push(t_stack *a, t_stack *b, int type)

@@ -31,10 +31,10 @@ t_stack		*init_stack(void)
 	stack = (t_stack *)malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
-	stack->first = NULL;
-	stack->second = NULL;
-	stack->last = NULL;
+	stack->head = NULL;
+	stack->tail = NULL;
 	stack->stack = NULL;
+	stack->cnt = 0;
 	return (stack);
 }
 
@@ -64,6 +64,18 @@ static t_element	*get_stack(int argc, char **argv)
 	return (stack);
 }
 
+static int	count_element(char **argv)
+{
+	int	i;
+	int	cnt;
+
+	i = 1;
+	cnt = 0;
+	while (argv[i++])
+		cnt++;
+	return (cnt);
+}
+
 t_stack				*set_stack(int argc, char **argv)
 {
 	t_stack	*a;
@@ -71,10 +83,10 @@ t_stack				*set_stack(int argc, char **argv)
 	check_arg(argc, argv);
 	a = init_stack();
 	a->stack = get_stack(argc, argv);
-	a->last = a->stack;
+	a->tail = a->stack;
 	while (a->stack->prev)
 		a->stack = a->stack->prev;
-	a->first = a->stack;
-	a->second = a->stack->next;
+	a->head = a->stack;
+	a->cnt = count_element(argv);
 	return (a);
 }
