@@ -1,10 +1,10 @@
 NAME = push_swap
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -g3 -fsanitize=address
-# ifeq ($(DEBUG),true)
-# 	CFLAGS += -g
-# endif
+# CFLAGS = -g3 -fsanitize=address
+ifeq ($(DEBUG),true)
+	CFLAGS += -g
+endif
 
 SRCS_DIR =	./srcs	\
 			./srcs/operation	\

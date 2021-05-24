@@ -81,20 +81,53 @@ int	is_finish(t_stack *a, t_stack *b, int *operate)
 
 void	sort_b(t_stack *b, int *operate)
 {
-	while (b->head->value > b->tail->value)
+	long	gap_a;
+	long	gap_b;
+
+	if (b->cnt == 2)
 	{
-			rev_rotate(NULL, b, operate);
-			swap(NULL, b, operate);
+		swap(NULL, b, operate);
+		return ;
 	}
-	while (b->head->value < b->tail->value)
-			rotate(NULL, b, operate);
+	gap_a = b->head->value - b->head->next->value;
+	gap_b = b->head->value - b->tail->value;
+	if (gap_a < 0)
+		gap_a *= (-1);
+	if (gap_b < 0)
+		gap_b *= (-1);
+	if (gap_a < gap_b) //bigger
+	{
+		while (b->head->value < b->head->next->value)
+		{
+			swap(NULL, b, operate);
+			if (b->head->next->value > b->head->next->next->value)
+				break ;
+			rotate(NULL,b, operate);
+		}
+		while (b->head->value < b->tail->value)
+			rev_rotate(NULL, b, operate);
+	}
+	else
+	{
+		while (b->head->value > b->tail->value)
+		{
+				rev_rotate(NULL, b, operate);
+				swap(NULL, b, operate);
+		}
+		while (b->head->value < b->tail->value)
+				rotate(NULL, b, operate);
+	}
 }
 
 int	push_swap(t_stack *a, t_stack *b)
 {
 	int	operate;
+	long	gap_a;
+	long	gap_b;
+	int		sign;
 
 	operate = 0;
+	sign = 0;
 	while (!is_finish(a, b, &operate))
 	{
 		if (is_a_sorted(a) && a->cnt == 2)
@@ -126,6 +159,7 @@ int	push_swap(t_stack *a, t_stack *b)
 			else if (operate & PB)
 			{
 				sort_b(b, &operate);
+				sign = 0;
 				push(a, b, PUSH_B, &operate);
 			}
 			else
@@ -141,24 +175,66 @@ int	push_swap(t_stack *a, t_stack *b)
 				}
 				else
 				{
-					if (b->head->value > b->tail->value)
+					if (sign == 0)
 					{
-						if (operate & RRA)
-							rev_rotate(a, b, &operate);
+						gap_a = b->head->value - b->head->next->value;
+						gap_b = b->head->value - b->tail->value;
+						if (gap_a < 0)
+							gap_a *= (-1);
+						if (gap_b < 0)
+							gap_b *= (-1);
+						if (gap_a < gap_b)
+							sign = 1;
 						else
-							rev_rotate(NULL, b, &operate);
-						if (operate & SA)
-							swap(a, b, &operate);
-						else
-							swap(NULL, b, &operate);
+							sign = -1;
 					}
-					else if (b->head->value < b->tail->value)
+					if (sign > 0)
 					{
-						if (operate & RA)
-							rotate(a, b, &operate);
-						else
-							rotate(NULL, b, &operate);
+						if (b->head->value < b->head->next->value)
+						{
+							if (operate & SA)
+								swap(a, b, &operate);
+							else
+								swap(NULL, b, &operate);
+							if (b->head->next->value < b->head->next->next->value)
+							{
+								if (operate & RA)
+									rotate(a, b, &operate);
+								else
+									rotate(NULL, b, &operate);
+							}
+						}
+						else if (b->head->value < b->tail->value)
+						{
+							if (operate & RRA)
+								rev_rotate(a, b, &operate);
+							else
+								rev_rotate(NULL, b, &operate);
+						}
 					}
+					else if (sign < 0)
+					{
+						if (b->head->value > b->tail->value)
+						{
+							if (operate & RRA)
+								rev_rotate(a, b, &operate);
+							else
+								rev_rotate(NULL, b, &operate);
+							if (operate & SA)
+								swap(a, b, &operate);
+							else
+								swap(NULL, b, &operate);
+						}
+						else if (b->head->value < b->tail->value)
+						{
+							if (operate & RA)
+								rotate(a, b, &operate);
+							else
+								rotate(NULL, b, &operate);
+						}
+					}
+					if (is_b_sorted(b))
+						sign = 0;
 				}
 			}
 		}
