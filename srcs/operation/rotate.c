@@ -14,22 +14,26 @@ void	rotate_stack(t_stack *a)
 	}
 }
 
-void	rotate(t_stack *a, t_stack *b)
+void	rotate(t_stack *a, t_stack *b, int *operate)
 {
 	if (a && b)
 	{
 		ft_putstr_fd("rr\n", STDOUT_FILENO);
+		*operate &= ~RA;
+		*operate &= ~RB;
 		rotate_stack(a);
 		rotate_stack(b);
 	}
 	else if (a && !b)
 	{
 		ft_putstr_fd("ra\n", STDOUT_FILENO);
+		*operate &= ~RA;
 		rotate_stack(a);
 	}
 	else if (!a && b)
 	{
 		ft_putstr_fd("rb\n", STDOUT_FILENO);
+		*operate &= ~RB;
 		rotate_stack(b);
 	}
 }

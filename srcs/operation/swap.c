@@ -15,22 +15,26 @@ static void	swap_stack(t_stack *a)
 	}
 }
 
-void		swap(t_stack *a, t_stack *b)
+void		swap(t_stack *a, t_stack *b, int *operate)
 {
 	if (a && b)
 	{
 		ft_putstr_fd("ss\n", STDOUT_FILENO);
+		*operate &= ~SA;
+		*operate &= ~SB;
 		swap_stack(a);
 		swap_stack(b);
 	}
 	else if (a && !b)
 	{
 		ft_putstr_fd("sa\n", STDOUT_FILENO);
+		*operate &= ~SA;
 		swap_stack(a);
 	}
 	else if (!a && b)
 	{
 		ft_putstr_fd("sb\n", STDOUT_FILENO);
+		*operate &= ~SB;
 		swap_stack(b);
 	}
 }

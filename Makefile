@@ -1,14 +1,18 @@
 NAME = push_swap
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -g3 -fsanitize=address
+# CFLAGS = -g3 -fsanitize=address
+ifeq ($(DEBUG),true)
+	CFLAGS += -g
+endif
+
 SRCS_DIR =	./srcs	\
 			./srcs/operation	\
 			./srcs/utils
 OBJS_DIR = ./objs
 INC_DIR = ./includes
-# ./srcs/push_swap.c
 SRCS =	./srcs/main.c	\
+		./srcs/push_swap.c	\
 		./srcs/check_arg.c	\
 		./srcs/error.c	\
 		./srcs/set_stack.c	\

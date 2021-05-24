@@ -130,4 +130,5 @@ $RECYCLE.BIN/
 .vscode/
 push_swap
 /test
+/push_swap_visualizer
 # End of https://www.toptal.com/developers/gitignore/api/c,macos,windows,linux

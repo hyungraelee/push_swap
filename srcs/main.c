@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 22:58:24 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/22 22:34:54 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/24 17:18:11 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,19 @@ int	main(int argc, char **argv)
 		// print_err(ERR_MSG0);
 	a = set_stack(argc, argv);
 	b = init_stack();
-	test_print(a);
+	// test_print(a);
 	// swap(a, NULL);
 	// rotate(a, NULL);
 	// rev_rotate(a, NULL);
-	push(a, b, PUSH_B);
-	push(a, b, PUSH_B);
-	swap(NULL, b);
+	// push(a, b, PUSH_B);
+	// push(a, b, PUSH_B);
+	// swap(NULL, b);
+	// test_print(a);
+	// test_print(b);
+	// push(a, b, PUSH_A);
+	// test_print(a);
+	// test_print(b);
+	push_swap(a, b);
 	test_print(a);
-	test_print(b);
-	push(a, b, PUSH_A);
-	test_print(a);
-	test_print(b);
 	return (0);
 }
