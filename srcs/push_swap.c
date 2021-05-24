@@ -53,7 +53,7 @@ int	is_finish(t_stack *a, t_stack *b, int *operate)
 		if (a->stack->value > a->stack->next->value)
 			*operate |= SA;
 	}
-	else
+	else if (*operate == 0)
 	{
 		if (a->head->value < a->head->next->value && a->head->next->value < a->tail->value)
 			*operate |= PB;
@@ -64,7 +64,15 @@ int	is_finish(t_stack *a, t_stack *b, int *operate)
 		else if (a->tail->value < a->head->value && a->head->value < a->head->next->value)
 			*operate |= RRA;
 		else if (a->head->next->value < a->tail->value && a->tail->value < a->head->value)
-			*operate |= RA;
+		{
+			if (a->head->next->next)
+			{
+				if (a->head->next->next->value > a->head->value)
+					*operate |= RRA;
+				else
+					*operate |= RA;
+			}
+		}
 		else if (a->tail->value < a->head->next->value && a->head->next->value < a->head->value)
 			*operate |= SA;
 	}
@@ -118,6 +126,7 @@ int	push_swap(t_stack *a, t_stack *b)
 			else if (operate & PB)
 			{
 				sort_b(b, &operate);
+				push(a, b, PUSH_B, &operate);
 			}
 			else
 			{
