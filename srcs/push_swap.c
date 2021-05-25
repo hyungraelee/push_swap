@@ -73,52 +73,88 @@ int	find_max_b(t_stack *b)
 
 int	push_swap(t_stack *a, t_stack *b)
 {
-	// if (a->cnt == 3)
-	while (a->cnt > 3)
+	if (a->cnt < 3)
 	{
-		if (a->stack->value != a->max3[0] && a->stack->value != a->max3[1] && a->stack->value != a->max3[2])
-			push(a, b, PUSH_B);
-		else
-			rotate(a, NULL);
+		if (a->head->value > a->head->next->value)
+			swap(a, NULL);
 	}
-	if (!is_a_sorted(a))
+	else if (a->cnt == 3)
 	{
-		if (a->head->value == a->max3[2])
+		if (a->head->value < a->tail->value && a->tail->value < a->head->next->value)
 		{
 			swap(a, NULL);
 			rotate(a, NULL);
 		}
-		else if (a->head->value == a->max3[1])
+		else if (a->head->next->value < a->head->value && a->head->value < a->tail->value)
+			swap(a, NULL);
+		else if (a->tail->value < a->head->value && a->head->value < a->head->next->value)
+			rev_rotate(a, NULL);
+		else if (a->tail->value < a->head->next->value && a->head->next->value < a->head->value)
 		{
-			if (a->tail->value == a->max3[0])
-				swap(a, NULL);
-			else
-				rev_rotate(a, NULL);
-		}
-		else if (a->head->value == a->max3[0])
-		{
-			if (a->tail->value == a->max3[2])
-			{
-				swap(a, NULL);
-				rev_rotate(a, NULL);
-			}
-			else
-				rotate(a, NULL);
-		}
-	}
-	while (!is_finish(a, b))
-	{
-		if (find_max_b(b) <= (b->cnt / 2))
-		{
-			while (b->head->value != b->max3[0])
-				rotate(NULL, b);
+			swap(a, NULL);
+			rev_rotate(a, NULL);
 		}
 		else
+			rotate(a, NULL);
+	}
+	else
+	{
+		while (a->cnt > 3)
 		{
-			while (b->head->value != b->max3[0])
-				rev_rotate(NULL, b);
+			if (a->stack->value != a->max3[0] && a->stack->value != a->max3[1] && a->stack->value != a->max3[2])
+				push(a, b, PUSH_B);
+			else
+			{
+				if (a->cnt < 6)
+				{
+					if (a->tail->value != a->max3[0] && a->tail->value != a->max3[1] && a->tail->value != a->max3[2])
+						rev_rotate(a, NULL);
+					else
+						rotate(a, NULL);
+				}
+				else
+					rotate(a, NULL);
+			}
 		}
-		push(a, b, PUSH_A);
+		if (!is_a_sorted(a))
+		{
+			if (a->head->value == a->max3[2])
+			{
+				swap(a, NULL);
+				rotate(a, NULL);
+			}
+			else if (a->head->value == a->max3[1])
+			{
+				if (a->tail->value == a->max3[0])
+					swap(a, NULL);
+				else
+					rev_rotate(a, NULL);
+			}
+			else if (a->head->value == a->max3[0])
+			{
+				if (a->tail->value == a->max3[2])
+				{
+					swap(a, NULL);
+					rev_rotate(a, NULL);
+				}
+				else
+					rotate(a, NULL);
+			}
+		}
+		while (!is_finish(a, b))
+		{
+			if (find_max_b(b) <= (b->cnt / 2))
+			{
+				while (b->head->value != b->max3[0])
+					rotate(NULL, b);
+			}
+			else
+			{
+				while (b->head->value != b->max3[0])
+					rev_rotate(NULL, b);
+			}
+			push(a, b, PUSH_A);
+		}
 	}
 	free_all(a, b);
 	return (1);
