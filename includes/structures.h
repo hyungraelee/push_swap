@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 23:29:30 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/25 19:13:08 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/25 23:28:06 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ struct s_stack
 	t_element	*tail;
 	int			cnt;
 	int			*max3;
+	int			mid;
 };
 
 struct s_element

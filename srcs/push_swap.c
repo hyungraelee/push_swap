@@ -99,6 +99,18 @@ int	push_swap(t_stack *a, t_stack *b)
 	}
 	else
 	{
+		while (a->stack->value != a->mid)
+		{
+			if (a->stack->value != a->max3[0] && a->stack->value != a->max3[1] && a->stack->value != a->max3[2])
+			{
+				if (a->stack->value < a->mid)
+					push(a, b, PUSH_B);
+				else
+					rotate(a, NULL);
+			}
+			else
+				rotate(a, NULL);
+		}
 		while (a->cnt > 3)
 		{
 			if (a->stack->value != a->max3[0] && a->stack->value != a->max3[1] && a->stack->value != a->max3[2])

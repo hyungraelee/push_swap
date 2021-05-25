@@ -152,6 +152,28 @@ void	get_max3(t_stack *a)
 	a->max3[2] = third_max(a);
 }
 
+void	get_mid(t_stack *a)
+{
+	int	min;
+	int	max;
+
+	min = a->stack->value;
+	max = a->stack->value;
+	while (a->stack)
+	{
+		if (a->stack->value < min)
+			min = a->stack->value;
+		else if (a->stack->value > max)
+			max = a->stack->value;
+		if (a->stack->next)
+			a->stack = a->stack->next;
+		else
+			break ;
+	}
+	a->stack = a->head;
+	a->mid = (min + max) / 2;
+}
+
 t_stack				*set_stack(int argc, char **argv)
 {
 	t_stack	*a;
@@ -165,6 +187,9 @@ t_stack				*set_stack(int argc, char **argv)
 	a->head = a->stack;
 	a->cnt = count_element(argv);
 	if (a->cnt > 3)
+	{
 		get_max3(a);
+		get_mid(a);
+	}
 	return (a);
 }
