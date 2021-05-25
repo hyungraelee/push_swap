@@ -34,7 +34,7 @@ int	is_a_sorted(t_stack *a)
 	return (1);
 }
 
-int	check_finish(t_stack *a, t_stack *b)
+int	is_finish(t_stack *a, t_stack *b)
 {
 	if (is_a_sorted(a))
 	{
@@ -44,201 +44,82 @@ int	check_finish(t_stack *a, t_stack *b)
 	return (0);
 }
 
-int	is_finish(t_stack *a, t_stack *b, int *operate)
+int	find_max_b(t_stack *b)
 {
-	if (check_finish(a, b))
-		return (1);
-	if (a->cnt == 2)
-	{
-		if (a->stack->value > a->stack->next->value)
-			*operate |= SA;
-	}
-	else if (*operate == 0)
-	{
-		if (a->head->value < a->head->next->value && a->head->next->value < a->tail->value)
-			*operate |= PB;
-		else if (a->head->value < a->tail->value && a->tail->value < a->head->next->value)
-			*operate |= RRA;
-		else if (a->head->next->value < a->head->value && a->head->value < a->tail->value)
-			*operate |= SA;
-		else if (a->tail->value < a->head->value && a->head->value < a->head->next->value)
-			*operate |= RRA;
-		else if (a->head->next->value < a->tail->value && a->tail->value < a->head->value)
-		{
-			if (a->head->next->next)
-			{
-				if (a->head->next->next->value > a->head->value)
-					*operate |= RRA;
-				else
-					*operate |= RA;
-			}
-		}
-		else if (a->tail->value < a->head->next->value && a->head->next->value < a->head->value)
-			*operate |= SA;
-	}
-	return (0);
-}
+	int	cnt;
+	int	cnt_max;
+	int	max;
 
-void	sort_b(t_stack *b, int *operate)
-{
-	long	gap_a;
-	long	gap_b;
-
-	if (b->cnt == 2)
+	cnt = 1;
+	cnt_max = 1;
+	max = b->stack->value;
+	while (b->stack)
 	{
-		swap(NULL, b, operate);
-		return ;
-	}
-	gap_a = b->head->value - b->head->next->value;
-	gap_b = b->head->value - b->tail->value;
-	if (gap_a < 0)
-		gap_a *= (-1);
-	if (gap_b < 0)
-		gap_b *= (-1);
-	if (gap_a < gap_b) //bigger
-	{
-		while (b->head->value < b->head->next->value)
+		if (b->stack->value > max)
 		{
-			swap(NULL, b, operate);
-			if (b->head->next->value > b->head->next->next->value)
-				break ;
-			rotate(NULL,b, operate);
+			max = b->stack->value;
+			cnt_max = cnt;
 		}
-		while (b->head->value < b->tail->value)
-			rev_rotate(NULL, b, operate);
+		if (b->stack->next)
+			b->stack = b->stack->next;
+		else
+			break ;
+		cnt++;
 	}
-	else
-	{
-		while (b->head->value > b->tail->value)
-		{
-				rev_rotate(NULL, b, operate);
-				swap(NULL, b, operate);
-		}
-		while (b->head->value < b->tail->value)
-				rotate(NULL, b, operate);
-	}
+	b->max3[0] = max;
+	b->stack = b->head;
+	return (cnt_max);
 }
 
 int	push_swap(t_stack *a, t_stack *b)
 {
-	int	operate;
-	long	gap_a;
-	long	gap_b;
-	int		sign;
-
-	operate = 0;
-	sign = 0;
-	while (!is_finish(a, b, &operate))
+	// if (a->cnt == 3)
+	while (a->cnt > 3)
 	{
-		if (is_a_sorted(a) && a->cnt == 2)
+		if (a->stack->value != a->max3[0] && a->stack->value != a->max3[1] && a->stack->value != a->max3[2])
+			push(a, b, PUSH_B);
+		else
+			rotate(a, NULL);
+	}
+	if (!is_a_sorted(a))
+	{
+		if (a->head->value == a->max3[2])
 		{
-			if (is_b_sorted(b))
+			swap(a, NULL);
+			rotate(a, NULL);
+		}
+		else if (a->head->value == a->max3[1])
+		{
+			if (a->tail->value == a->max3[0])
+				swap(a, NULL);
+			else
+				rev_rotate(a, NULL);
+		}
+		else if (a->head->value == a->max3[0])
+		{
+			if (a->tail->value == a->max3[2])
 			{
-				while (!is_finish(a, b, &operate))
-					push(a, b, PUSH_A, &operate);
-				return (1);
+				swap(a, NULL);
+				rev_rotate(a, NULL);
 			}
 			else
-			{
-				sort_b(b, &operate);
-			}
+				rotate(a, NULL);
+		}
+	}
+	while (!is_finish(a, b))
+	{
+		if (find_max_b(b) <= (b->cnt / 2))
+		{
+			while (b->head->value != b->max3[0])
+				rotate(NULL, b);
 		}
 		else
 		{
-			if (is_b_sorted(b))
-			{
-				if (operate & PB)
-					push(a, b, PUSH_B, &operate);
-				else if (operate & SA)
-					swap(a, NULL, &operate);
-				else if (operate & RA)
-					rotate(a, NULL, &operate);
-				else if (operate & RRA)
-					rev_rotate(a, NULL, &operate);
-			}
-			else if (operate & PB)
-			{
-				sort_b(b, &operate);
-				sign = 0;
-				push(a, b, PUSH_B, &operate);
-			}
-			else
-			{
-				if (b->cnt == 2)
-				{
-					if (operate & SA)
-						swap(a, b, &operate);
-					else if (operate & RA)
-						rotate(a, b, &operate);
-					else if (operate & RRA)
-						rev_rotate(a, b, &operate);
-				}
-				else
-				{
-					if (sign == 0)
-					{
-						gap_a = b->head->value - b->head->next->value;
-						gap_b = b->head->value - b->tail->value;
-						if (gap_a < 0)
-							gap_a *= (-1);
-						if (gap_b < 0)
-							gap_b *= (-1);
-						if (gap_a < gap_b)
-							sign = 1;
-						else
-							sign = -1;
-					}
-					if (sign > 0)
-					{
-						if (b->head->value < b->head->next->value)
-						{
-							if (operate & SA)
-								swap(a, b, &operate);
-							else
-								swap(NULL, b, &operate);
-							if (b->head->next->value < b->head->next->next->value)
-							{
-								if (operate & RA)
-									rotate(a, b, &operate);
-								else
-									rotate(NULL, b, &operate);
-							}
-						}
-						else if (b->head->value < b->tail->value)
-						{
-							if (operate & RRA)
-								rev_rotate(a, b, &operate);
-							else
-								rev_rotate(NULL, b, &operate);
-						}
-					}
-					else if (sign < 0)
-					{
-						if (b->head->value > b->tail->value)
-						{
-							if (operate & RRA)
-								rev_rotate(a, b, &operate);
-							else
-								rev_rotate(NULL, b, &operate);
-							if (operate & SA)
-								swap(a, b, &operate);
-							else
-								swap(NULL, b, &operate);
-						}
-						else if (b->head->value < b->tail->value)
-						{
-							if (operate & RA)
-								rotate(a, b, &operate);
-							else
-								rotate(NULL, b, &operate);
-						}
-					}
-					if (is_b_sorted(b))
-						sign = 0;
-				}
-			}
+			while (b->head->value != b->max3[0])
+				rev_rotate(NULL, b);
 		}
+		push(a, b, PUSH_A);
 	}
-	// free_all
+	free_all(a, b);
 	return (1);
 }

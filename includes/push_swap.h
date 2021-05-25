@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 22:57:44 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/24 16:54:16 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/25 21:27:08 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ void	print_err(char *str);
 void	check_arg(int argc, char **argv);
 t_stack	*set_stack(int argc, char **argv);
 t_stack	*init_stack(void);
-void	push(t_stack *a, t_stack *b, int type, int *operate);
-void	swap(t_stack *a, t_stack *b, int *operate);
-void	rotate(t_stack *a, t_stack *b, int *operate);
-void	rev_rotate(t_stack *a, t_stack *b, int *operate);
+void	push(t_stack *a, t_stack *b, int type);
+void	swap(t_stack *a, t_stack *b);
+void	rotate(t_stack *a, t_stack *b);
+void	rev_rotate(t_stack *a, t_stack *b);
+void	free_all(t_stack *a, t_stack *b);
 
 #endif

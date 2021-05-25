@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 22:58:24 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/24 21:19:23 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/25 21:32:58 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 		// print_err(ERR_MSG0);
 	a = set_stack(argc, argv);
 	b = init_stack();
+	// printf("%d %d %d\n", a->max3[0], a->max3[1], a->max3[2]);
 	// test_print(a);
 	// swap(a, NULL);
 	// rotate(a, NULL, &status);

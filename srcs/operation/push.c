@@ -61,18 +61,16 @@ void	push_stack(t_stack *src, t_stack *des)
 	}
 }
 
-void	push(t_stack *a, t_stack *b, int type, int *operate)
+void	push(t_stack *a, t_stack *b, int type)
 {
 	if (type == PUSH_A)
 	{
 		ft_putstr_fd("pa\n", STDOUT_FILENO);
 		push_stack(b, a);
-		*operate &= ~PA;
 	}
 	else if (type == PUSH_B)
 	{
 		ft_putstr_fd("pb\n", STDOUT_FILENO);
 		push_stack(a, b);
-		*operate &= ~PB;
 	}
 }

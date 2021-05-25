@@ -2,9 +2,9 @@ NAME = push_swap
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
 # CFLAGS = -g3 -fsanitize=address
-ifeq ($(DEBUG),true)
-	CFLAGS += -g
-endif
+# ifeq ($(DEBUG),true)
+# 	CFLAGS += -g
+# endif
 
 SRCS_DIR =	./srcs	\
 			./srcs/operation	\
@@ -15,6 +15,7 @@ SRCS =	./srcs/main.c	\
 		./srcs/push_swap.c	\
 		./srcs/check_arg.c	\
 		./srcs/error.c	\
+		./srcs/free.c	\
 		./srcs/set_stack.c	\
 		./srcs/operation/push.c	\
 		./srcs/operation/swap.c	\
