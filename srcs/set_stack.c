@@ -47,7 +47,7 @@ static t_element	*get_stack(int argc, char **argv)
 	t_element	*temp;
 	int		i;
 
-	i = 1;
+	i = 0;
 	stack = NULL;
 	temp = NULL;
 	while (argv[i])
@@ -72,7 +72,7 @@ static int	count_element(char **argv)
 	int	i;
 	int	cnt;
 
-	i = 1;
+	i = 0;
 	cnt = 0;
 	while (argv[i++])
 		cnt++;

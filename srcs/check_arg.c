@@ -5,7 +5,7 @@ static int	check_duplicate(int argc, char **argv)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (i < argc - 1)
 	{
 		j = i + 1;
@@ -24,7 +24,7 @@ static int	check_integer_format(char **argv)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (argv[i])
 	{
 		j = 0;
@@ -47,7 +47,7 @@ static int	check_integer_range(char **argv)
 	int	flag;
 	int	cnt;
 
-	i = 1;
+	i = 0;
 	while (argv[i])
 	{
 		j = 0;

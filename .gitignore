@@ -129,6 +129,7 @@ $RECYCLE.BIN/
 #
 .vscode/
 push_swap
+checker_Mac
 /test
 /push_swap_visualizer
 /vscode_argument_set

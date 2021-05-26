@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 22:57:44 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/25 23:59:22 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/26 15:24:33 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define RRR 1024
 
 
-int		push_swap(t_stack *a, t_stack *b);
+int		push_swap(t_stack *a, t_stack *b, int r);
 void	print_err(char *str);
 void	check_arg(int argc, char **argv);
 t_stack	*set_stack(int argc, char **argv);
@@ -50,5 +50,8 @@ void	rotate(t_stack *a, t_stack *b);
 void	rev_rotate(t_stack *a, t_stack *b);
 void	free_all(t_stack *a, t_stack *b);
 void	get_mid(t_stack *a);
+
+void	sort_a_to_b(t_stack *a, t_stack *b, int r);
+void	sort_b_to_a(t_stack *a, t_stack *b, int r);
 
 #endif

@@ -23,8 +23,11 @@ SRCS =	./srcs/main.c	\
 		./srcs/operation/rev_rotate.c	\
 		./srcs/utils/ft_atoi.c	\
 		./srcs/utils/ft_isdigit.c	\
+		./srcs/utils/ft_memcpy.c	\
 		./srcs/utils/ft_putstr_fd.c	\
+		./srcs/utils/ft_split.c	\
 		./srcs/utils/ft_strcmp.c	\
+		./srcs/utils/ft_strlcpy.c	\
 		./srcs/utils/ft_strlen.c
 
 
