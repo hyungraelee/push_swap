@@ -1,10 +1,10 @@
 #include "push_swap.h"
 
-int	is_b_sorted(t_stack *b)
+int	is_b_sorted(t_stack *b, int r)
 {
 	if (b->cnt == 0)
 		return (1);
-	while (b->stack->next)
+	while (r--)
 	{
 		if (b->stack->value < b->stack->next->value)
 		{
@@ -17,11 +17,11 @@ int	is_b_sorted(t_stack *b)
 	return (1);
 }
 
-int	is_a_sorted(t_stack *a)
+int	is_a_sorted(t_stack *a, int r)
 {
 	if (a->cnt == 0)
 		return (1);
-	while (a->stack->next)
+	while (r--)
 	{
 		if (a->stack->value > a->stack->next->value)
 		{
@@ -32,43 +32,6 @@ int	is_a_sorted(t_stack *a)
 	}
 	a->stack = a->head;
 	return (1);
-}
-
-int	is_finish(t_stack *a, t_stack *b)
-{
-	if (is_a_sorted(a))
-	{
-		if (b->cnt == 0 && b->stack == NULL)
-			return (1);
-	}
-	return (0);
-}
-
-int	find_max_b(t_stack *b)
-{
-	int	cnt;
-	int	cnt_max;
-	int	max;
-
-	cnt = 1;
-	cnt_max = 1;
-	max = b->stack->value;
-	while (b->stack)
-	{
-		if (b->stack->value > max)
-		{
-			max = b->stack->value;
-			cnt_max = cnt;
-		}
-		if (b->stack->next)
-			b->stack = b->stack->next;
-		else
-			break ;
-		cnt++;
-	}
-	b->max3[0] = max;
-	b->stack = b->head;
-	return (cnt_max);
 }
 
 void	get_pivot(t_stack *a, int r, int *pivot)
@@ -152,6 +115,8 @@ void	sort_a_to_b(t_stack *a, t_stack *b, int r)
 		handle_3_in_a(a);
 		return ;
 	}
+	else if (is_a_sorted(a, r))
+		return ;
 	get_pivot(a, r, pivot);
 	cnt_ra = 0;
 	cnt_rb = 0;
@@ -254,6 +219,12 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 		push(a, b, PUSH_A);
 		return ;
 	}
+	else if (is_b_sorted(b, r))
+	{
+		while (r--)
+			push(a, b, PUSH_A);
+		return ;
+	}
 	get_pivot(b, r, pivot);
 	cnt_ra = 0;
 	cnt_rb = 0;
@@ -277,12 +248,30 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 		}
 	}
 	sort_a_to_b(a, b, cnt_pa - cnt_ra);
-	tmp = cnt_rb;
-	while (tmp-- > 0)
-		rev_rotate(NULL, b);
-	tmp1 = cnt_ra;
-	while (tmp1-- > 0)
-		rev_rotate(a, NULL);
+	// tmp = cnt_rb;
+	// while (tmp-- > 0)
+	// 	rev_rotate(NULL, b);
+	// tmp1 = cnt_ra;
+	// while (tmp1-- > 0)
+	// 	rev_rotate(a, NULL);
+	if (cnt_rb > cnt_ra)
+	{
+		tmp = cnt_ra;
+		while (tmp-- > 0)
+			rev_rotate(a, b);
+		tmp = cnt_rb - cnt_ra;
+		while (tmp-- > 0)
+			rev_rotate(NULL, b);
+	}
+	else
+	{
+		tmp = cnt_rb;
+		while (tmp-- > 0)
+			rev_rotate(a, b);
+		tmp = cnt_ra - cnt_rb;
+		while (tmp-- > 0)
+			rev_rotate(a, NULL);
+	}
 	sort_a_to_b(a, b, cnt_ra);
 	sort_b_to_a(a, b, cnt_rb);
 }
@@ -294,7 +283,27 @@ void	quick_sort(t_stack *a, t_stack *b, int r)
 
 int	push_swap(t_stack *a, t_stack *b, int r)
 {
-	quick_sort(a, b, r);
+	if (a->cnt == 3)
+	{
+		if (a->head->value < a->tail->value && a->tail->value < a->head->next->value)
+		{
+			swap(a, NULL);
+			rotate(a, NULL);
+		}
+		else if (a->head->next->value < a->head->value && a->head->value < a->tail->value)
+			swap(a, NULL);
+		else if (a->tail->value < a->head->value && a->head->value < a->head->next->value)
+			rev_rotate(a, NULL);
+		else if (a->tail->value < a->head->next->value && a->head->next->value < a->head->value)
+		{
+			swap(a, NULL);
+			rev_rotate(a, NULL);
+		}
+		else
+			rotate(a, NULL);
+	}
+	else
+		quick_sort(a, b, r);
 	// free_all(a, b);
 	return (1);
 }
