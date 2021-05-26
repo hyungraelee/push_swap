@@ -56,7 +56,7 @@ void	get_pivot(t_stack *a, int r, int *pivot)
 		pivot[0] = pivot[1] + 1;
 }
 
-void	swap_a_with_b(t_stack *a, t_stack *b)
+void	optimizing_swap_a(t_stack *a, t_stack *b)
 {
 	if (b->head && b->head->next)
 	{
@@ -74,34 +74,34 @@ void	handle_3_in_a(t_stack *a, t_stack *b)
 	if (a->stack->value < a->stack->next->next->value && a->stack->next->next->value < a->stack->next->value)
 	{
 		rotate(a, NULL);
-		swap_a_with_b(a, b);
+		optimizing_swap_a(a, b);
 		rev_rotate(a, NULL);
 	}
 	else if (a->stack->next->value < a->stack->value && a->stack->value < a->stack->next->next->value)
 	{
-		swap_a_with_b(a, b);
+		optimizing_swap_a(a, b);
 	}
 	else if (a->stack->next->next->value < a->stack->value && a->stack->value < a->stack->next->value)
 	{
 		rotate(a, NULL);
-		swap_a_with_b(a, b);
+		optimizing_swap_a(a, b);
 		rev_rotate(a, NULL);
-		swap_a_with_b(a, b);
+		optimizing_swap_a(a, b);
 	}
 	else if (a->stack->next->value < a->stack->next->next->value && a->stack->next->next->value < a->stack->value)
 	{
-		swap_a_with_b(a, b);
+		optimizing_swap_a(a, b);
 		rotate(a, NULL);
-		swap_a_with_b(a, b);
+		optimizing_swap_a(a, b);
 		rev_rotate(a, NULL);
 	}
 	else if (a->stack->next->next->value < a->stack->next->value && a->stack->next->value < a->stack->value)
 	{
-		swap_a_with_b(a, b);
+		optimizing_swap_a(a, b);
 		rotate(a, NULL);
-		swap_a_with_b(a, b);
+		optimizing_swap_a(a, b);
 		rev_rotate(a, NULL);
-		swap_a_with_b(a, b);
+		optimizing_swap_a(a, b);
 	}
 }
 
@@ -124,7 +124,6 @@ void	sort_a_to_b(t_stack *a, t_stack *b, int r)
 	int	cnt_rb;
 	int	cnt_pb;
 	int	tmp;
-	int	tmp1;
 
 	a->stack = a->head;
 	if (r == 0 || r == 1)
@@ -132,7 +131,7 @@ void	sort_a_to_b(t_stack *a, t_stack *b, int r)
 	else if (r == 2)
 	{
 		if (a->stack->value > a->stack->next->value)
-			swap_a_with_b(a, b);
+			optimizing_swap_a(a, b);
 		return ;
 	}
 	else if (r == 3)
@@ -190,7 +189,7 @@ void	sort_a_to_b(t_stack *a, t_stack *b, int r)
 	sort_b_to_a(a, b, cnt_pb - cnt_rb);
 }
 
-void	swap_b_with_a(t_stack *a, t_stack *b)
+void	optimizing_swap_b(t_stack *a, t_stack *b)
 {
 	if (a->head && a->head->next)
 	{
@@ -207,34 +206,34 @@ void	handle_3_in_b(t_stack *a, t_stack *b)
 {
 	if (b->stack->value < b->stack->next->value && b->stack->next->value < b->stack->next->next->value)
 	{
-		swap_b_with_a(a, b);
+		optimizing_swap_b(a, b);
 		rotate(NULL, b);
-		swap_b_with_a(a, b);
+		optimizing_swap_b(a, b);
 		rev_rotate(NULL, b);
-		swap_b_with_a(a, b);
+		optimizing_swap_b(a, b);
 	}
 	else if (b->stack->value < b->stack->next->next->value && b->stack->next->next->value < b->stack->next->value)
 	{
-		swap_b_with_a(a, b);;
+		optimizing_swap_b(a, b);;
 		rotate(NULL, b);
-		swap_b_with_a(a, b);
+		optimizing_swap_b(a, b);
 		rev_rotate(NULL, b);
 	}
 	else if (b->stack->next->value < b->stack->value && b->stack->value < b->stack->next->next->value)
 	{
 		rotate(NULL, b);
-		swap_b_with_a(a, b);
+		optimizing_swap_b(a, b);
 		rev_rotate(NULL, b);
-		swap_b_with_a(a, b);
+		optimizing_swap_b(a, b);
 	}
 	else if (b->stack->next->next->value < b->stack->value && b->stack->value < b->stack->next->value)
 	{
-		swap_b_with_a(a, b);
+		optimizing_swap_b(a, b);
 	}
 	else if (b->stack->next->value < b->stack->next->next->value && b->stack->next->next->value < b->stack->value)
 	{
 		rotate(NULL, b);
-		swap_b_with_a(a, b);
+		optimizing_swap_b(a, b);
 		rev_rotate(NULL, b);
 	}
 }
@@ -258,7 +257,6 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 	int	cnt_rb;
 	int	cnt_pa;
 	int	tmp;
-	int	tmp1;
 
 	b->stack = b->head;
 	if (r == 0)
@@ -271,7 +269,7 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 	else if (r == 2)
 	{
 		if (b->stack->value < b->stack->next->value)
-			swap_b_with_a(a, b);
+			optimizing_swap_b(a, b);
 		push(a, b, PUSH_A);
 		push(a, b, PUSH_A);
 		return ;
@@ -316,12 +314,6 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 		r--;
 	}
 	sort_a_to_b(a, b, cnt_pa - cnt_ra);
-	// tmp = cnt_rb;
-	// while (tmp-- > 0)
-	// 	rev_rotate(NULL, b);
-	// tmp1 = cnt_ra;
-	// while (tmp1-- > 0)
-	// 	rev_rotate(a, NULL);
 	if (cnt_rb > cnt_ra)
 	{
 		tmp = cnt_ra;
@@ -372,6 +364,6 @@ int	push_swap(t_stack *a, t_stack *b, int r)
 	}
 	else
 		quick_sort(a, b, r);
-	// free_all(a, b);
+	free_all(a, b);
 	return (1);
 }
