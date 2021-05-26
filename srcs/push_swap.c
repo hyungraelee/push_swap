@@ -56,40 +56,65 @@ void	get_pivot(t_stack *a, int r, int *pivot)
 		pivot[0] = pivot[1] + 1;
 }
 
-void	handle_3_in_a(t_stack *a)
+void	swap_a_with_b(t_stack *a, t_stack *b)
+{
+	if (b->head && b->head->next)
+	{
+		if (b->head->value < b->head->next->value)
+			swap(a, b);
+		else
+			swap(a, NULL);
+	}
+	else
+		swap(a, NULL);
+}
+
+void	handle_3_in_a(t_stack *a, t_stack *b)
 {
 	if (a->stack->value < a->stack->next->next->value && a->stack->next->next->value < a->stack->next->value)
 	{
 		rotate(a, NULL);
-		swap(a, NULL);
+		swap_a_with_b(a, b);
 		rev_rotate(a, NULL);
 	}
 	else if (a->stack->next->value < a->stack->value && a->stack->value < a->stack->next->next->value)
 	{
-		swap(a, NULL);
+		swap_a_with_b(a, b);
 	}
 	else if (a->stack->next->next->value < a->stack->value && a->stack->value < a->stack->next->value)
 	{
 		rotate(a, NULL);
-		swap(a, NULL);
+		swap_a_with_b(a, b);
 		rev_rotate(a, NULL);
-		swap(a, NULL);
+		swap_a_with_b(a, b);
 	}
 	else if (a->stack->next->value < a->stack->next->next->value && a->stack->next->next->value < a->stack->value)
 	{
-		swap(a, NULL);
+		swap_a_with_b(a, b);
 		rotate(a, NULL);
-		swap(a, NULL);
+		swap_a_with_b(a, b);
 		rev_rotate(a, NULL);
 	}
 	else if (a->stack->next->next->value < a->stack->next->value && a->stack->next->value < a->stack->value)
 	{
-		swap(a, NULL);
+		swap_a_with_b(a, b);
 		rotate(a, NULL);
-		swap(a, NULL);
+		swap_a_with_b(a, b);
 		rev_rotate(a, NULL);
-		swap(a, NULL);
+		swap_a_with_b(a, b);
 	}
+}
+
+int		is_whole_big(t_stack *a, int r, int pivot)
+{
+	while (r--)
+	{
+		if (a->stack->value <= pivot)
+			return (0);
+		a->stack = a->stack->next;
+	}
+	a->stack = a->head;
+	return (1);
 }
 
 void	sort_a_to_b(t_stack *a, t_stack *b, int r)
@@ -107,12 +132,12 @@ void	sort_a_to_b(t_stack *a, t_stack *b, int r)
 	else if (r == 2)
 	{
 		if (a->stack->value > a->stack->next->value)
-			swap(a, NULL);
+			swap_a_with_b(a, b);
 		return ;
 	}
 	else if (r == 3)
 	{
-		handle_3_in_a(a);
+		handle_3_in_a(a, b);
 		return ;
 	}
 	else if (is_a_sorted(a, r))
@@ -121,10 +146,12 @@ void	sort_a_to_b(t_stack *a, t_stack *b, int r)
 	cnt_ra = 0;
 	cnt_rb = 0;
 	cnt_pb = 0;
-	while (r-- > 0)
+	while (r > 0)
 	{
 		if (a->stack->value > pivot[0])
 		{
+			if (is_whole_big(a, r, pivot[0]))
+				break ;
 			rotate(a, NULL);
 			cnt_ra++;
 		}
@@ -138,52 +165,90 @@ void	sort_a_to_b(t_stack *a, t_stack *b, int r)
 				cnt_rb++;
 			}
 		}
+		r--;
 	}
-	tmp = cnt_ra;
-	while (tmp-- > 0)
-		rev_rotate(a, NULL);
-	tmp1 = cnt_rb;
-	while (tmp1-- > 0)
-		rev_rotate(NULL, b);
-	sort_a_to_b(a, b, cnt_ra);
+	if (cnt_rb > cnt_ra) // same as b to a
+	{
+		tmp = cnt_ra;
+		while (tmp-- > 0)
+			rev_rotate(a, b);
+		tmp = cnt_rb - cnt_ra;
+		while (tmp-- > 0)
+			rev_rotate(NULL, b);
+	}
+	else
+	{
+		tmp = cnt_rb;
+		while (tmp-- > 0)
+			rev_rotate(a, b);
+		tmp = cnt_ra - cnt_rb;
+		while (tmp-- > 0)
+			rev_rotate(a, NULL);
+	}
+	sort_a_to_b(a, b, cnt_ra + r);
 	sort_b_to_a(a, b, cnt_rb);
 	sort_b_to_a(a, b, cnt_pb - cnt_rb);
 }
 
-void	handle_3_in_b(t_stack *b)
+void	swap_b_with_a(t_stack *a, t_stack *b)
+{
+	if (a->head && a->head->next)
+	{
+		if (a->head->value > a->head->next->value)
+			swap(a, b);
+		else
+			swap(NULL, b);
+	}
+	else
+		swap(NULL, b);
+}
+
+void	handle_3_in_b(t_stack *a, t_stack *b)
 {
 	if (b->stack->value < b->stack->next->value && b->stack->next->value < b->stack->next->next->value)
 	{
-		swap(NULL, b);
+		swap_b_with_a(a, b);
 		rotate(NULL, b);
-		swap(NULL, b);
+		swap_b_with_a(a, b);
 		rev_rotate(NULL, b);
-		swap(NULL, b);
+		swap_b_with_a(a, b);
 	}
 	else if (b->stack->value < b->stack->next->next->value && b->stack->next->next->value < b->stack->next->value)
 	{
-		swap(NULL, b);
+		swap_b_with_a(a, b);;
 		rotate(NULL, b);
-		swap(NULL, b);
+		swap_b_with_a(a, b);
 		rev_rotate(NULL, b);
 	}
 	else if (b->stack->next->value < b->stack->value && b->stack->value < b->stack->next->next->value)
 	{
 		rotate(NULL, b);
-		swap(NULL, b);
+		swap_b_with_a(a, b);
 		rev_rotate(NULL, b);
-		swap(NULL, b);
+		swap_b_with_a(a, b);
 	}
 	else if (b->stack->next->next->value < b->stack->value && b->stack->value < b->stack->next->value)
 	{
-		swap(NULL, b);
+		swap_b_with_a(a, b);
 	}
 	else if (b->stack->next->value < b->stack->next->next->value && b->stack->next->next->value < b->stack->value)
 	{
 		rotate(NULL, b);
-		swap(NULL, b);
+		swap_b_with_a(a, b);
 		rev_rotate(NULL, b);
 	}
+}
+
+int		is_whole_small(t_stack *b, int r, int pivot)
+{
+	while (r--)
+	{
+		if (b->stack->value > pivot)
+			return (0);
+		b->stack = b->stack->next;
+	}
+	b->stack = b->head;
+	return (1);
 }
 
 void	sort_b_to_a(t_stack *a, t_stack *b, int r)
@@ -206,14 +271,14 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 	else if (r == 2)
 	{
 		if (b->stack->value < b->stack->next->value)
-			swap(NULL, b);
+			swap_b_with_a(a, b);
 		push(a, b, PUSH_A);
 		push(a, b, PUSH_A);
 		return ;
 	}
 	else if (r == 3)
 	{
-		handle_3_in_b(b);
+		handle_3_in_b(a, b);
 		push(a, b, PUSH_A);
 		push(a, b, PUSH_A);
 		push(a, b, PUSH_A);
@@ -229,7 +294,7 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 	cnt_ra = 0;
 	cnt_rb = 0;
 	cnt_pa = 0;
-	while (r-- > 0)
+	while (r > 0)
 	{
 		if (b->stack->value > pivot[1])
 		{
@@ -243,9 +308,12 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 		}
 		else
 		{
+			if (is_whole_small(b, r, pivot[1]))
+				break ;
 			rotate(NULL, b);
 			cnt_rb++;
 		}
+		r--;
 	}
 	sort_a_to_b(a, b, cnt_pa - cnt_ra);
 	// tmp = cnt_rb;
@@ -273,7 +341,7 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 			rev_rotate(a, NULL);
 	}
 	sort_a_to_b(a, b, cnt_ra);
-	sort_b_to_a(a, b, cnt_rb);
+	sort_b_to_a(a, b, cnt_rb + r);
 }
 
 void	quick_sort(t_stack *a, t_stack *b, int r)
