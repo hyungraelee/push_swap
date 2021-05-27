@@ -8,19 +8,33 @@ CFLAGS = -g3 -fsanitize=address
 
 SRCS_DIR =	./srcs	\
 			./srcs/operation	\
+			./srcs/tools	\
 			./srcs/utils
 OBJS_DIR = ./objs
 INC_DIR = ./includes
 SRCS =	./srcs/main.c	\
 		./srcs/push_swap.c	\
+		./srcs/quicksort_a.c	\
+		./srcs/quicksort_b.c	\
 		./srcs/check_arg.c	\
-		./srcs/error.c	\
-		./srcs/free.c	\
+		./srcs/handle_little_input.c	\
+		./srcs/init.c	\
 		./srcs/set_stack.c	\
 		./srcs/operation/push.c	\
 		./srcs/operation/swap.c	\
 		./srcs/operation/rotate.c	\
 		./srcs/operation/rev_rotate.c	\
+		./srcs/tools/chk_whole_elements.c	\
+		./srcs/tools/error.c	\
+		./srcs/tools/escape_condition.c	\
+		./srcs/tools/free.c	\
+		./srcs/tools/get_pivot.c	\
+		./srcs/tools/handle_3_in_a.c	\
+		./srcs/tools/handle_3_in_b.c	\
+		./srcs/tools/init_cnt.c	\
+		./srcs/tools/is_sorted.c	\
+		./srcs/tools/optimizing.c	\
+		./srcs/tools/reset_rotate.c	\
 		./srcs/utils/ft_atoi.c	\
 		./srcs/utils/ft_isdigit.c	\
 		./srcs/utils/ft_memcpy.c	\
@@ -29,7 +43,6 @@ SRCS =	./srcs/main.c	\
 		./srcs/utils/ft_strcmp.c	\
 		./srcs/utils/ft_strlcpy.c	\
 		./srcs/utils/ft_strlen.c
-
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 vpath %.c $(SRCS_DIR)

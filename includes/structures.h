@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 23:29:30 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/27 17:36:25 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/27 19:17:21 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef struct s_stack		t_stack;
 typedef struct s_element	t_element;
+typedef struct s_arg		t_arg;
 
 struct s_stack
 {
@@ -29,9 +30,17 @@ struct s_stack
 
 struct s_element
 {
-	int		value;
+	int			value;
 	t_element	*next;
 	t_element	*prev;
+};
+
+struct s_arg
+{
+	int	pivot[2];
+	int	cnt_ra;
+	int	cnt_rb;
+	int	cnt_push;
 };
 
 #endif

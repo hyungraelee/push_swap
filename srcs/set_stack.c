@@ -1,18 +1,5 @@
 #include "push_swap.h"
 
-static t_element	*init_element(void)
-{
-	t_element	*res;
-
-	res = (t_element *)malloc(sizeof(t_element));
-	if (!res)
-		return (NULL);
-	res->value = 0;
-	res->next = NULL;
-	res->prev = NULL;
-	return (res);
-}
-
 static t_element	*get_element(char *argv)
 {
 	t_element	*res;
@@ -24,25 +11,11 @@ static t_element	*get_element(char *argv)
 	return (res);
 }
 
-t_stack		*init_stack(void)
-{
-	t_stack	*stack;
-
-	stack = (t_stack *)malloc(sizeof(t_stack));
-	if (!stack)
-		return (NULL);
-	stack->head = NULL;
-	stack->tail = NULL;
-	stack->stack = NULL;
-	stack->cnt = 0;
-	return (stack);
-}
-
 static t_element	*get_stack(int argc, char **argv)
 {
 	t_element	*stack;
 	t_element	*temp;
-	int		i;
+	int			i;
 
 	i = 0;
 	stack = NULL;
@@ -64,7 +37,7 @@ static t_element	*get_stack(int argc, char **argv)
 	return (stack);
 }
 
-static int	count_element(char **argv)
+static int			count_element(char **argv)
 {
 	int	i;
 	int	cnt;
@@ -76,7 +49,7 @@ static int	count_element(char **argv)
 	return (cnt);
 }
 
-void	get_mid(t_stack *a)
+static void			get_mid(t_stack *a)
 {
 	int	min;
 	int	max;

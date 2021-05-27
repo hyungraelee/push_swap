@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 22:57:44 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/26 15:24:33 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/27 18:27:18 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,41 +17,30 @@
 # include <stdlib.h>
 # include "structures.h"
 # include "utils.h"
-
-# define ERR_MSG0 "Error : Please input some arguments.\n"
-# define ERR_MSG1 "Error : There are duplicate arguments.\n"
-# define ERR_MSG2 "Error : Some arguments aren't integer.\n"
-# define ERR_MSG3 "Error : Some arguments are bigger than an integer.\n"
+# include "tools.h"
 
 # define PUSH_A 1
 # define PUSH_B 2
 
-# define SA 1
-# define SB 2
-# define SS 4
-# define PA 8
-# define PB 16
-# define RA 32
-# define RB 64
-# define RR 128
-# define RRA 256
-# define RRB 512
-# define RRR 1024
+int			push_swap(t_stack *a, t_stack *b, int r);
+
+char		**init_arg(int *argc, char **argv);
+void		check_arg(int argc, char **argv);
+
+t_stack		*set_stack(int argc, char **argv);
+t_stack		*init_stack(void);
+t_element	*init_element(void);
+
+void		handle_little_input(t_stack *a, t_stack *b, int r);
+
+void		quicksort_in_a(t_stack *a, t_stack *b, int r);
+void		quicksort_in_b(t_stack *a, t_stack *b, int r);
+
+void		push(t_stack *a, t_stack *b, int type);
+void		swap(t_stack *a, t_stack *b);
+void		rotate(t_stack *a, t_stack *b);
+void		rev_rotate(t_stack *a, t_stack *b);
 
 
-int		push_swap(t_stack *a, t_stack *b, int r);
-void	print_err(char *str);
-void	check_arg(int argc, char **argv);
-t_stack	*set_stack(int argc, char **argv);
-t_stack	*init_stack(void);
-void	push(t_stack *a, t_stack *b, int type);
-void	swap(t_stack *a, t_stack *b);
-void	rotate(t_stack *a, t_stack *b);
-void	rev_rotate(t_stack *a, t_stack *b);
-void	free_all(t_stack *a, t_stack *b);
-void	get_mid(t_stack *a);
-
-void	sort_a_to_b(t_stack *a, t_stack *b, int r);
-void	sort_b_to_a(t_stack *a, t_stack *b, int r);
 
 #endif
