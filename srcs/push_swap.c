@@ -152,19 +152,27 @@ void	sort_a_to_b(t_stack *a, t_stack *b, int r)
 			if (is_whole_big(a, r, pivot[0]))
 				break ;
 			rotate(a, NULL);
+			r--;
 			cnt_ra++;
 		}
 		else
 		{
 			push(a, b, PUSH_B);
+			r--;
 			cnt_pb++;
 			if (b->head->value > pivot[1])
 			{
-				rotate(NULL, b);
+				if (r > 0 && a->stack->value > pivot[0])
+				{
+					rotate(a, b);
+					cnt_ra++;
+					r--;
+				}
+				else
+					rotate(NULL, b);
 				cnt_rb++;
 			}
 		}
-		r--;
 	}
 	if (cnt_rb > cnt_ra) // same as b to a
 	{
@@ -297,10 +305,18 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 		if (b->stack->value > pivot[1])
 		{
 			push(a, b, PUSH_A);
+			r--;
 			cnt_pa++;
 			if (a->head->value < pivot[0])
 			{
-				rotate(a, NULL);
+				if (r > 0 && b->stack->value <= pivot[1])
+				{
+					rotate(a, b);
+					r--;
+					cnt_rb++;
+				}
+				else
+					rotate(a, NULL);
 				cnt_ra++;
 			}
 		}
@@ -309,9 +325,9 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 			if (is_whole_small(b, r, pivot[1]))
 				break ;
 			rotate(NULL, b);
+			r--;
 			cnt_rb++;
 		}
-		r--;
 	}
 	sort_a_to_b(a, b, cnt_pa - cnt_ra);
 	if (cnt_rb > cnt_ra)
