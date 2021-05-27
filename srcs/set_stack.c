@@ -35,9 +35,6 @@ t_stack		*init_stack(void)
 	stack->tail = NULL;
 	stack->stack = NULL;
 	stack->cnt = 0;
-	stack->max3 = (int *)malloc(sizeof(int) * 3);
-	if (!stack->max3)
-		return (NULL);
 	return (stack);
 }
 
@@ -79,79 +76,6 @@ static int	count_element(char **argv)
 	return (cnt);
 }
 
-int					third_max(t_stack *a)
-{
-	int	max;
-
-	if (a->stack->value == a->max3[0] || a->stack->value == a->max3[1])
-		a->stack = a->stack->next;
-	if (a->stack->value == a->max3[0] || a->stack->value == a->max3[1])
-		a->stack = a->stack->next;
-	max = a->stack->value;
-	while (a->stack)
-	{
-		if (a->stack->value != a->max3[0] && a->stack->value != a->max3[1])
-		{
-			if (a->stack->value > max)
-				max = a->stack->value;
-		}
-		if (a->stack->next)
-			a->stack = a->stack->next;
-		else
-			break ;
-	}
-	a->stack = a->head;
-	return (max);
-}
-
-int					second_max(t_stack *a)
-{
-	int	max;
-
-	if (a->stack->value == a->max3[0])
-		a->stack = a->stack->next;
-	max = a->stack->value;
-	while (a->stack)
-	{
-		if (a->stack->value != a->max3[0])
-		{
-			if (a->stack->value > max)
-				max = a->stack->value;
-		}
-		if (a->stack->next)
-			a->stack = a->stack->next;
-		else
-			break ;
-	}
-	a->stack = a->head;
-	return (max);
-}
-
-int					first_max(t_stack *a)
-{
-	int	max;
-
-	max = a->stack->value;
-	while (a->stack)
-	{
-		if (a->stack->value > max)
-			max = a->stack->value;
-		if (a->stack->next)
-			a->stack = a->stack->next;
-		else
-			break ;
-	}
-	a->stack = a->head;
-	return (max);
-}
-
-void	get_max3(t_stack *a)
-{
-	a->max3[0] = first_max(a);
-	a->max3[1] = second_max(a);
-	a->max3[2] = third_max(a);
-}
-
 void	get_mid(t_stack *a)
 {
 	int	min;
@@ -186,10 +110,7 @@ t_stack				*set_stack(int argc, char **argv)
 		a->stack = a->stack->prev;
 	a->head = a->stack;
 	a->cnt = count_element(argv);
-	if (a->cnt > 3)
-	{
-		get_max3(a);
+	if (a->cnt == 5)
 		get_mid(a);
-	}
 	return (a);
 }
