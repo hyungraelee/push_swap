@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 22:58:24 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/26 22:27:12 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/27 17:22:26 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,5 @@ int	main(int argc, char **argv)
 	a = set_stack(argc, arg);
 	b = init_stack();
 	push_swap(a, b, argc);
-	// test_print(a);
 	return (0);
 }

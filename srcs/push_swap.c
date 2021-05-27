@@ -378,6 +378,38 @@ int	push_swap(t_stack *a, t_stack *b, int r)
 		else
 			rotate(a, NULL);
 	}
+	else if (a->cnt == 5)
+	{
+		while (r--)
+		{
+			if (b->cnt == 2)
+				break ;
+			if (a->stack->value < a->mid)
+				push(a, b, PUSH_B);
+			else
+				rotate(a, NULL);
+		}
+		a->stack = a->head;
+
+		if (a->head->value < a->tail->value && a->tail->value < a->head->next->value)
+		{
+			swap(a, NULL);
+			rotate(a, NULL);
+		}
+		else if (a->head->next->value < a->head->value && a->head->value < a->tail->value)
+			swap(a, NULL);
+		else if (a->tail->value < a->head->value && a->head->value < a->head->next->value)
+			rev_rotate(a, NULL);
+		else if (a->tail->value < a->head->next->value && a->head->next->value < a->head->value)
+		{
+			swap(a, NULL);
+			rev_rotate(a, NULL);
+		}
+		else
+			rotate(a, NULL);
+
+		sort_b_to_a(a, b, 2);
+	}
 	else
 		quick_sort(a, b, r);
 	free_all(a, b);
