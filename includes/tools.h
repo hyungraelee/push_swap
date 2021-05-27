@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 21:16:32 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/27 21:16:33 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/27 23:09:25 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "push_swap.h"
 
-# define ERR_MSG0 "Error : Please input some arguments.\n"
 # define ERR_MSG1 "Error : There are duplicate arguments.\n"
 # define ERR_MSG2 "Error : Some arguments aren't integer.\n"
 # define ERR_MSG3 "Error : Some arguments are bigger than an integer.\n"
