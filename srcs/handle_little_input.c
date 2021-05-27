@@ -6,13 +6,13 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 21:17:14 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/27 21:17:15 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/27 21:22:59 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	only_3_input(t_stack *a, t_stack *b)
+static void	only_3_input(t_stack *a)
 {
 	if (a->head->value < a->tail->value && \
 	a->tail->value < a->head->next->value)
@@ -49,14 +49,14 @@ static void	only_5_input(t_stack *a, t_stack *b, int r)
 			rotate(a, NULL);
 	}
 	a->stack = a->head;
-	only_3_input(a, b);
+	only_3_input(a);
 	quicksort_in_b(a, b, 2);
 }
 
 void		handle_little_input(t_stack *a, t_stack *b, int r)
 {
 	if (a->cnt == 3)
-		only_3_input(a, b);
+		only_3_input(a);
 	else if (a->cnt == 5)
 		only_5_input(a, b, r);
 }

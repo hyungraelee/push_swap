@@ -6,13 +6,13 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 21:16:38 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/27 21:18:17 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/27 21:24:01 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	set_src_stack(t_stack *src, t_stack *des)
+static void	set_src_stack(t_stack *src)
 {
 	if (src->cnt == 2)
 	{
@@ -39,7 +39,7 @@ static void	handle_des_empty(t_stack *src, t_stack *des)
 	des->head = des->stack;
 	des->head->prev = NULL;
 	des->head->next = NULL;
-	set_src_stack(src, des);
+	set_src_stack(src);
 	des->tail = NULL;
 }
 
@@ -49,7 +49,7 @@ static void	handle_des_exist(t_stack *src, t_stack *des)
 	des->head->next = des->stack;
 	des->stack->prev = des->head;
 	des->stack = des->head;
-	set_src_stack(src, des);
+	set_src_stack(src);
 	if (des->cnt == 1)
 		des->tail = des->head->next;
 }

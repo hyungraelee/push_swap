@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 21:17:23 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/27 21:17:24 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/27 21:23:33 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_element	*get_element(char *argv)
 	return (res);
 }
 
-static t_element	*get_stack(int argc, char **argv)
+static t_element	*get_stack(char **argv)
 {
 	t_element	*stack;
 	t_element	*temp;
@@ -89,7 +89,7 @@ t_stack				*set_stack(int argc, char **argv)
 
 	check_arg(argc, argv);
 	a = init_stack();
-	a->stack = get_stack(argc, argv);
+	a->stack = get_stack(argv);
 	a->tail = a->stack;
 	while (a->stack->prev)
 		a->stack = a->stack->prev;
