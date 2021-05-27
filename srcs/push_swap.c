@@ -352,11 +352,6 @@ void	sort_b_to_a(t_stack *a, t_stack *b, int r)
 	sort_b_to_a(a, b, cnt_rb + r);
 }
 
-void	quick_sort(t_stack *a, t_stack *b, int r)
-{
-	sort_a_to_b(a, b, r);
-}
-
 int	push_swap(t_stack *a, t_stack *b, int r)
 {
 	if (a->cnt == 3)
@@ -375,7 +370,7 @@ int	push_swap(t_stack *a, t_stack *b, int r)
 			swap(a, NULL);
 			rev_rotate(a, NULL);
 		}
-		else
+		else if (a->head->next->value < a->tail->value && a->tail->value < a->head->value)
 			rotate(a, NULL);
 	}
 	else if (a->cnt == 5)
@@ -391,7 +386,7 @@ int	push_swap(t_stack *a, t_stack *b, int r)
 		}
 		a->stack = a->head;
 
-		if (a->head->value < a->tail->value && a->tail->value < a->head->next->value)
+		if (a->head->value < a->tail->value && a->tail->value < a->head->next->value)	// same with a->cnt == 3
 		{
 			swap(a, NULL);
 			rotate(a, NULL);
@@ -405,13 +400,13 @@ int	push_swap(t_stack *a, t_stack *b, int r)
 			swap(a, NULL);
 			rev_rotate(a, NULL);
 		}
-		else
+		else if (a->head->next->value < a->tail->value && a->tail->value < a->head->value)
 			rotate(a, NULL);
 
 		sort_b_to_a(a, b, 2);
 	}
 	else
-		quick_sort(a, b, r);
+		sort_a_to_b(a, b, r);
 	free_all(a, b);
 	return (1);
 }
