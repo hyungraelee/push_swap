@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/27 21:16:45 by hyunlee           #+#    #+#             */
+/*   Updated: 2021/05/27 21:16:46 by hyunlee          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	rotate_stack(t_stack *a)
+static void	rotate_stack(t_stack *a)
 {
 	if (a->cnt > 1)
 	{
@@ -14,7 +26,7 @@ void	rotate_stack(t_stack *a)
 	}
 }
 
-void	rotate(t_stack *a, t_stack *b)
+void		rotate(t_stack *a, t_stack *b)
 {
 	if (a && b)
 	{

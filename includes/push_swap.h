@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 22:57:44 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/27 18:27:18 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/27 21:15:22 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,5 @@ void		push(t_stack *a, t_stack *b, int type);
 void		swap(t_stack *a, t_stack *b);
 void		rotate(t_stack *a, t_stack *b);
 void		rev_rotate(t_stack *a, t_stack *b);
-
-
 
 #endif
