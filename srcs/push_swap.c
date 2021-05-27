@@ -4,7 +4,7 @@ int	is_b_sorted(t_stack *b, int r)
 {
 	if (b->cnt == 0)
 		return (1);
-	while (r--)
+	while (r-- > 1)
 	{
 		if (b->stack->value < b->stack->next->value)
 		{
@@ -21,7 +21,7 @@ int	is_a_sorted(t_stack *a, int r)
 {
 	if (a->cnt == 0)
 		return (1);
-	while (r--)
+	while (r-- > 1)
 	{
 		if (a->stack->value > a->stack->next->value)
 		{
