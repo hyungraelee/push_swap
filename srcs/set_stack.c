@@ -6,7 +6,7 @@
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 21:17:23 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/27 21:23:33 by hyunlee          ###   ########.fr       */
+/*   Updated: 2021/05/28 00:39:25 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,6 @@ static t_element	*get_stack(char **argv)
 	return (stack);
 }
 
-static int			count_element(char **argv)
-{
-	int	i;
-	int	cnt;
-
-	i = 0;
-	cnt = 0;
-	while (argv[i++])
-		cnt++;
-	return (cnt);
-}
-
 static void			get_mid(t_stack *a)
 {
 	int	min;
@@ -94,7 +82,7 @@ t_stack				*set_stack(int argc, char **argv)
 	while (a->stack->prev)
 		a->stack = a->stack->prev;
 	a->head = a->stack;
-	a->cnt = count_element(argv);
+	a->cnt = argc;
 	if (a->cnt == 5)
 		get_mid(a);
 	return (a);

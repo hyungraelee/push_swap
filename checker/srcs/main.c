@@ -9,6 +9,7 @@ int	main(int argc, char **argv)
 
 	if (argc <= 1)
 		return (0);
+// printf("%s\n", argv[1]);
 	arg = init_arg(&argc, argv);
 	a = set_stack(argc, arg);
 	b = init_stack();

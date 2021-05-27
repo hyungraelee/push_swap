@@ -1,4 +1,4 @@
-NAME = checker
+NAME = mychecker
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 # CFLAGS = -g3 -fsanitize=address
@@ -28,8 +28,11 @@ SRCS =	./srcs/main.c	\
 		./srcs/utils/ft_putstr_fd.c	\
 		./srcs/utils/ft_split.c	\
 		./srcs/utils/ft_strcmp.c	\
+		./srcs/utils/ft_strdup.c	\
 		./srcs/utils/ft_strlcpy.c	\
-		./srcs/utils/ft_strlen.c
+		./srcs/utils/ft_strlen.c	\
+		./srcs/utils/get_next_line_utils.c	\
+		./srcs/utils/get_next_line.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 vpath %.c $(SRCS_DIR)

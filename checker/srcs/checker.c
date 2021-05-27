@@ -34,7 +34,7 @@ void	swap_handler(t_stack *a, t_stack *b, char *operation)
 		swap(a, NULL);
 	else if (!ft_strcmp("sb", operation))
 		swap(NULL, b);
-	else if (!ft_strcmp("sr", operation))
+	else if (!ft_strcmp("ss", operation))
 		swap(a, b);
 }
 void	rotate_handler(t_stack *a, t_stack *b, char *operation)
@@ -100,25 +100,20 @@ void	check_sort(t_stack *a, t_stack *b, int r)
 
 void	checker(t_stack *a, t_stack *b, int r)
 {
-	char	buf[READMAX];
-	char	**operations;
-	int		i;
+	char	*buf;
 
-	if (read(STDIN_FILENO, buf, READMAX) < 0)
-		exit(1);
-	operations = ft_split(buf, '\n');
-	i = -1;
-	while (operations[++i])
+	while (get_next_line(0, &buf) > 0)
 	{
-		if (is_push(operations[i]))
-			push_handler(a, b, operations[i]);
-		else if (is_swap(operations[i]))
-			swap_handler(a, b, operations[i]);
-		else if (is_rotate(operations[i]))
-			rotate_handler(a, b, operations[i]);
-		else if (is_rev_rotate(operations[i]))
-			rev_rotate_handler(a, b, operations[i]);
+		if (is_push(buf))
+			push_handler(a, b, buf);
+		else if (is_swap(buf))
+			swap_handler(a, b, buf);
+		else if (is_rotate(buf))
+			rotate_handler(a, b, buf);
+		else if (is_rev_rotate(buf))
+			rev_rotate_handler(a, b, buf);
 	}
+	if (buf)
+		free(buf);
 	check_sort(a, b, r);
-	free_double_arr(operations);
 }

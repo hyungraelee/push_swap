@@ -4,10 +4,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <string.h>
 # include "structures.h"
 # include "utils.h"
+# include "get_next_line.h"
 
-# define READMAX 10000
+# define BUFFER_SIZE 5000
 
 # define PUSH_A 1
 # define PUSH_B 2

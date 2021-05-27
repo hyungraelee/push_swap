@@ -59,11 +59,15 @@ $(OBJS_DIR) :
 $(OBJS_DIR)/%.o : %.c | $(OBJS_DIR)
 	@$(CC) $(CFLAGS) -o $@ -I$(INC_DIR) -c $^
 
-run: re
-	@./$(NAME)
+check :
+	@make -C ./checker re
+	@cp ./checker/mychecker ./mychecker
 
 clean :
 	@$(RM) -r $(OBJS_DIR)
+	@$(RM) -r ./checker/$(OBJS_DIR)
+	@$(RM) ./checker/mychecker
+	@$(RM) ./mychecker
 
 fclean : clean
 	@$(RM) $(NAME)
