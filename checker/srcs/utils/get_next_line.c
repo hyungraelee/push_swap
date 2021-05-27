@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/28 02:26:23 by hyunlee           #+#    #+#             */
+/*   Updated: 2021/05/28 02:26:24 by hyunlee          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 int		ft_check_linefeed(char *sv)
@@ -46,7 +58,7 @@ int		get_next_line(int fd, char **line)
 	char		temp[BUFFER_SIZE + 1];
 	int			read_size;
 
-	if (fd < 0 || fd > OPEN_MAX ||line == NULL || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > OPEN_MAX || line == NULL || BUFFER_SIZE <= 0)
 		return (-1);
 	if (save[fd] == 0)
 		save[fd] = ft_strdup("");

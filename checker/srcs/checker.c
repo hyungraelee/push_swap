@@ -1,62 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/28 02:26:45 by hyunlee           #+#    #+#             */
+/*   Updated: 2021/05/28 02:26:46 by hyunlee          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-int		is_push(char *operation)
-{
-	return (!ft_strcmp("pa", operation) || !ft_strcmp("pb", operation));
-}
-
-int		is_swap(char *operation)
-{
-	return	(!ft_strcmp("sa", operation) || !ft_strcmp("sb", operation) || !ft_strcmp("ss", operation));
-}
-
-int		is_rotate(char *operation)
-{
-	return (!ft_strcmp("ra", operation) || !ft_strcmp("rb", operation) || !ft_strcmp("rr", operation));
-}
-
-int		is_rev_rotate(char *operation)
-{
-	return (!ft_strcmp("rra", operation) || !ft_strcmp("rrb", operation) || !ft_strcmp("rrr", operation));
-}
-
-void	push_handler(t_stack *a, t_stack *b, char *operation)
-{
-	if (!ft_strcmp("pa", operation))
-		push(a, b, PUSH_A);
-	else if (!ft_strcmp("pb", operation))
-		push(a, b, PUSH_B);
-}
-
-void	swap_handler(t_stack *a, t_stack *b, char *operation)
-{
-	if (!ft_strcmp("sa", operation))
-		swap(a, NULL);
-	else if (!ft_strcmp("sb", operation))
-		swap(NULL, b);
-	else if (!ft_strcmp("ss", operation))
-		swap(a, b);
-}
-void	rotate_handler(t_stack *a, t_stack *b, char *operation)
-{
-	if (!ft_strcmp("ra", operation))
-		rotate(a, NULL);
-	else if (!ft_strcmp("rb", operation))
-		rotate(NULL, b);
-	else if (!ft_strcmp("rr", operation))
-		rotate(a, b);
-}
-void	rev_rotate_handler(t_stack *a, t_stack *b, char *operation)
-{
-	if (!ft_strcmp("rra", operation))
-		rev_rotate(a, NULL);
-	else if (!ft_strcmp("rrb", operation))
-		rev_rotate(NULL, b);
-	else if (!ft_strcmp("rrr", operation))
-		rev_rotate(a, b);
-}
-
-int	is_a_sorted(t_stack *a, int r)
+static int	is_a_sorted(t_stack *a, int r)
 {
 	if (a->cnt == 0)
 		return (1);
@@ -73,21 +29,7 @@ int	is_a_sorted(t_stack *a, int r)
 	return (1);
 }
 
-void	print_ok(void)
-{
-	ft_putstr_fd(B_GREEN, STDOUT_FILENO);
-	ft_putstr_fd("OK\n", STDOUT_FILENO);
-	ft_putstr_fd(C_RESET, STDOUT_FILENO);
-}
-
-void	print_ko(void)
-{
-	ft_putstr_fd(B_RED, STDOUT_FILENO);
-	ft_putstr_fd("KO\n", STDOUT_FILENO);
-	ft_putstr_fd(C_RESET, STDOUT_FILENO);
-}
-
-void	check_sort(t_stack *a, t_stack *b, int r)
+static void	check_sort(t_stack *a, t_stack *b, int r)
 {
 	if (is_a_sorted(a, r))
 		if (b->stack == NULL)
@@ -98,7 +40,7 @@ void	check_sort(t_stack *a, t_stack *b, int r)
 		print_ko();
 }
 
-void	checker(t_stack *a, t_stack *b, int r)
+void		checker(t_stack *a, t_stack *b, int r)
 {
 	char	*buf;
 

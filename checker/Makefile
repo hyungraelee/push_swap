@@ -14,14 +14,17 @@ INC_DIR =	./includes
 SRCS =	./srcs/main.c	\
 		./srcs/checker.c	\
 		./srcs/check_arg.c	\
+		./srcs/check_operation.c	\
 		./srcs/init.c	\
 		./srcs/set_stack.c	\
+		./srcs/error.c	\
+		./srcs/free.c	\
+		./srcs/print.c	\
+		./srcs/handler.c	\
 		./srcs/operation/push.c	\
 		./srcs/operation/swap.c	\
 		./srcs/operation/rotate.c	\
 		./srcs/operation/rev_rotate.c	\
-		./srcs/error.c	\
-		./srcs/free.c	\
 		./srcs/utils/ft_atoi.c	\
 		./srcs/utils/ft_isdigit.c	\
 		./srcs/utils/ft_memcpy.c	\

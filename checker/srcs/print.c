@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/28 02:26:11 by hyunlee           #+#    #+#             */
-/*   Updated: 2021/05/28 02:26:12 by hyunlee          ###   ########.fr       */
+/*   Created: 2021/05/28 02:27:01 by hyunlee           #+#    #+#             */
+/*   Updated: 2021/05/28 02:27:02 by hyunlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	print_ok(void)
 {
-	int	i;
+	ft_putstr_fd(B_GREEN, STDOUT_FILENO);
+	ft_putstr_fd("OK\n", STDOUT_FILENO);
+	ft_putstr_fd(C_RESET, STDOUT_FILENO);
+}
 
-	i = 0;
-	while (s1[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	if (s2[i] != '\0')
-		return (s1[i] - s2[i]);
-	return (0);
+void	print_ko(void)
+{
+	ft_putstr_fd(B_RED, STDOUT_FILENO);
+	ft_putstr_fd("KO\n", STDOUT_FILENO);
+	ft_putstr_fd(C_RESET, STDOUT_FILENO);
 }

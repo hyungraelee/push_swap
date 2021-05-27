@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunlee <hyunlee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/28 02:26:49 by hyunlee           #+#    #+#             */
+/*   Updated: 2021/05/28 02:27:20 by hyunlee          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 static void	free_stack(t_stack *a)
@@ -17,7 +29,7 @@ static void	free_stack(t_stack *a)
 	}
 }
 
-void	free_double_arr(char **arr)
+void		free_double_arr(char **arr)
 {
 	int	i;
 
@@ -29,7 +41,7 @@ void	free_double_arr(char **arr)
 	free(arr);
 }
 
-void	free_all(t_stack *a, t_stack *b, char **arg)
+void		free_all(t_stack *a, t_stack *b, char **arg)
 {
 	free_stack(a);
 	free_stack(b);
